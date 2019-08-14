@@ -1,1 +1,1 @@
-[{"name": "Newmoon", "author": "Stephanie", "read": true}]
+[{"name": "Harrry Potter", "author": "JK Rowling", "read": false}]

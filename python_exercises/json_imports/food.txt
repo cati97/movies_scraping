@@ -1,0 +1,19 @@
+{
+    "food" : [
+        {
+        "type" : "fruits",
+        "healthy" : "yes"
+        },
+
+        {
+        "type" : "vegetables",
+        "healthy" : "yes"
+        },
+
+        {
+        "type" : "sweets",
+        "healthy" : "no"
+        }
+
+    ]
+}

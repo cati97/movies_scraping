@@ -26,13 +26,13 @@ def menu():
             prompt_mark_as_read()
         elif user_input == 'd':
             prompt_delete_book()
-        elif user_input == 'q':
-            break
         else:
             print("I don't understand your command, please try again.")
             user_input = input(user_choice)
         print("Well done! Now let's do something different :) ")
         user_input = input(user_choice)
+    else:
+        print("Byeeee")
 
 
 def prompt_add_book():
