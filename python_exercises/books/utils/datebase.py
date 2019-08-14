@@ -12,8 +12,9 @@ def add_book(name, author):
 
 def list_books():
     for book in books:
+        read = 'YES' if book['read'] else 'NO'  # ternary statement
         print(f"Book nr {books.index(book) + 1}:")
-        print(f"Title: {book['name']}, Author: {book['author']}, Read: {book['read']}")
+        print(f"Title: {book['name']}, Author: {book['author']}, Read: {read}")
 
 
 def mark_as_read(name):
