@@ -11,7 +11,9 @@ def add_book(name, author):
 
 
 def list_books():
-    print(books)
+    for book in books:
+        print(f"Book nr {books.index(book) + 1}:")
+        print(f"Title: {book['name']}, Author: {book['author']}, Read: {book['read']}")
 
 
 def mark_as_read(name):
