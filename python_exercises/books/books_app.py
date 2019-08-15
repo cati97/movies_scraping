@@ -40,8 +40,7 @@ def prompt_add_book():
 
 def list_books():
     for book in get_all_books():
-        read = 'YES' if book['read'] == '1' else 'NO'
-        print(f"{book['name']} by {book['author']} — Read: {read}")
+        print(f"{book['name']} by {book['author']} — Read: {book['read']}")
 
 
 def prompt_mark_as_read():
