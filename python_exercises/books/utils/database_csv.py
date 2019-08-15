@@ -1,36 +1,41 @@
-with open("/home/cati/Desktop/python_exercises/books/utils/my_books_csv.txt", "r") as csv:
-    lines = csv.readlines()
-lines = [line.strip() for line in lines]
+books_file = 'books.txt'
+
+
+def create_book_table():
+    with open(books_file, 'w') as file:
+        pass  # just to make sure the file is there
+
+
+def get_all_books():
+    with open(books_file, 'r') as file:
+        lines = [line.strip().split(',') for line in file.readlines()]
+
+    return [
+        {'name': line[0], 'author': line[1], 'read': line[2]}
+        for line in lines
+    ]
 
 
 def add_book(name, author):
-    lines.append(f"{name},{author},NO")
-    with open("/home/cati/Desktop/python_exercises/books/utils/my_books_csv.txt", "w") as add:
-        add.writelines("\n".join(lines))
+    with open(books_file, 'a') as file:
+        file.write(f'{name},{author},0\n')
 
 
-def list_books():
-    for line in lines:
-        name, author, read = line.split(',')
-        print(f"Book nr {lines.index(line) + 1}:")
-        print(f"Title: {name}, Author: {author}, Read: {read}")
+def _save_all_books(books):
+    with open(books_file, 'w') as file:
+        for book in books:
+            file.write(f"{book['name']},{book['author']},{book['read']}\n")
 
 
-def mark_as_read(name_to_mark):
-    for line in lines:
-        name, author, read = line.split(',')
-        if name_to_mark == name:
-            lines.remove(line)
-            lines.append(f"{name},{author},YES")
-    with open("/home/cati/Desktop/python_exercises/books/utils/my_books_csv.txt", "w") as r:
-        r.writelines("\n".join(lines))
+def mark_book_as_read(name):
+    books = get_all_books()
+    for book in books:
+        if book['name'] == name:
+            book['read'] = '1'
+    _save_all_books(books)
 
 
-def delete_book(name_to_delete):
-    for line in lines:
-        name, author, read = line.split(',')
-        if name_to_delete == name:
-            lines.remove(line)
-    with open("/home/cati/Desktop/python_exercises/books/utils/my_books_csv.txt", "w") as delete:
-        delete.writelines("\n".join(lines))
-
+def delete_book(name):
+    books = get_all_books()
+    books = [book for book in books if book['name'] != name]
+    _save_all_books(books)
