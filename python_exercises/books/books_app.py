@@ -12,6 +12,7 @@ Your choice: """
 
 
 def menu():
+    create_book_table()
     user_input = input(user_choice)
     while user_input != 'q':
         if user_input == 'a':
@@ -37,9 +38,15 @@ def prompt_add_book():
     add_book(book_name, book_author)
 
 
+def list_books():
+    for book in get_all_books():
+        read = 'YES' if book['read'] == '1' else 'NO'
+        print(f"{book['name']} by {book['author']} — Read: {read}")
+
+
 def prompt_mark_as_read():
     book_name = input("Name of the book that you want to mark as read: ")
-    mark_as_read(book_name)
+    mark_book_as_read(book_name)
 
 
 def prompt_delete_book():
