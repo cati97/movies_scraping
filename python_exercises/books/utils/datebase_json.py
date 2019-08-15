@@ -1,42 +1,38 @@
 import json
 
-with open("/home/cati/Desktop/python_exercises/books/utils/my_books_json.txt", "r") as content:
-    books = json.load(content)
+book_file = 'books.json'
+
+
+def create_book_table():  # when running for the first time create an empty list
+    with open(book_file, 'w') as file:
+        json.dump([], file)
 
 
 def add_book(name, author):
+    books = get_all_books()
     books.append({'name': name, 'author': author, 'read': False})
-    with open("/home/cati/Desktop/python_exercises/books/utils/my_books_json.txt", "w") as add:
-        json.dump(books, add)
+    _save_all_books(books)
 
 
-def list_books():
+def get_all_books():
+    with open(book_file, "r") as content:
+        return json.load(content)
+
+
+def mark_book_as_read(name):
+    books = get_all_books()
     for book in books:
-        read = 'YES' if book['read'] else 'NO'  # ternary statement
-        print(f"Book nr {books.index(book) + 1}:")
-        print(f"Title: {book['name']}, Author: {book['author']}, Read: {read}")
-
-
-def mark_as_read(name):
-    for book in books:
-        if book['name'] == name:
+        if name == book['name']:
             book['read'] = True
-    with open("/home/cati/Desktop/python_exercises/books/utils/my_books_json.txt", "w") as read:
-        json.dump(books, read)
+    _save_all_books(books)
+
+
+def _save_all_books(books):
+    with open(book_file, 'w') as file:
+        json.dump(books, file)
 
 
 def delete_book(name):
-    global books  # don't create a local new variable but change the global one
+    books = get_all_books()
     books = [book for book in books if name != book['name']]
-    with open("/home/cati/Desktop/python_exercises/books/utils/my_books_json.txt", "w") as delete:
-        json.dump(books, delete)
-
-
-''' not recommended practice to remove from list while iterating over it
-def delete_book(name):
-    for book in books:
-        if book['name'] == name:
-            books.remove(book)
-    with open("/home/cati/Desktop/python_exercises/books/utils/my_books_json.txt", "w") as delete:
-        json.dump(books, delete)
-'''
+    _save_all_books(books)
