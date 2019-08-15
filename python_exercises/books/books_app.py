@@ -1,4 +1,4 @@
-from books.utils.database_csv import *
+from books.utils.datebase_json import *
 
 user_choice = """
 Enter:
@@ -40,7 +40,8 @@ def prompt_add_book():
 
 def list_books():
     for book in get_all_books():
-        print(f"{book['name']} by {book['author']} — Read: {book['read']}")
+        read = 'YES' if book['read'] else 'NO'
+        print(f"{book['name']} by {book['author']} — Read: {read}")
 
 
 def prompt_mark_as_read():
